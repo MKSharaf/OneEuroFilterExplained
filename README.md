@@ -31,7 +31,7 @@ A simple explanation for low-pass filters is that they are filters which are use
 
 ![lowpassfilter-formula1](https://github.com/MKSharaf/OneEuroFilterExplained/assets/135005981/6193033f-f696-4a43-a8f1-a9164505aaa7)
 
-### Exponential Smoothing
+## Exponential Smoothing
 
 Exponential smoothing is a kind of a low-pass filter that assigns exponentially decreasing weights to past observations over time. As we discussed already, exponential smoothing is a low-pass filter which means that is used to remove high frequencies. 
 
@@ -41,9 +41,30 @@ This is the overall formula for exponential smoothing, and now let's explain eac
 
 * $x_t$ is the input data, aka the observed data at time $t$
 * $a$ is a smoothing factor, where $0 < a < 1$
-* $y_{t-1}$ is the last smoothed observations that is the result of all the previous computations
+* $y_{t-1}$ is the last smoothed observation that is the result of all the previous computations
 * $y_t$ is the result of the new smoothed observation 
 
 $a$ has no formal procedure to be chosen with. A large value for $a$ reduces the smoothing effect, while a small value increases it. This is because the closer $a$'s value gets to $1$, the less weight that will be given to the past obeservations to the point where if $a$ becomes $1$ the output will just be the current observation with no smoothing effect. The opposite is also true, the closer $a$'s value gets to $0$, the greater the smoothing effect will be, this also happens because lesser weight will be given to current observations which will make the smoothing effect less responsive to new observations.
 
 This is basically how it also works as a filter. The closer $a$ will be to $0$, the more jitter that would be reduced, but at the same it would result in more lag since the outputs won't respond as quickly to new observations. 
+
+### How it works?
+
+So, how exactly does exponential smoothing gives exponentially decreasing weights to its past observations? We can see this effect by performing direct substitution to the original formula
+
+$y_t = ax_t + (1-a)y_{t-1}$ <br/>
+&emsp; $= ax_t + a(1-a)x_{t-1} + (1-a)^2y_{t-2}$ <br/>
+&emsp; $= ax_t + a(1-a)x_{t-1} + a(1-a)^2x_{t-2} + (1-a)^3y_{t-3}$ &emsp; $etc.$
+
+As we can see, $y_{t-1}$ holds the last smoothed observation and it eoncombeses all of the previous observations. This also shows how a past observation gets a smaller and smaller value as a result of the increasing power.
+
+One last thing to do now for us to understand exponential smoothing is to show how the filter works at the start
+
+$y_0 = ax_0$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(1)$<br/>
+$y_1 = ax_1 + (1-a)y_0$ &emsp; $(2)$<br/>
+$y_2 = ax_2 + (1-a)y_1$ &emsp; $(3)$<br/>
+
+Now when we substitute $(2)$ for $(3)$
+
+$y_2 = ax_2 + (1-a)(ax_1 + (1-a)y_0)$<br/>
+&emsp; $=
