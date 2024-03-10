@@ -64,9 +64,20 @@ $y_0 = ax_0$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(1)$<br/>
 $y_1 = ax_1 + (1-a)y_0$ &emsp; $(2)$<br/>
 $y_2 = ax_2 + (1-a)y_1$ &emsp; $(3)$<br/>
 
-Now when we substitute $(2)$ for $(3)$
+***We substitute*** $(2)$ ***for*** $(3)$
 
 $y_2 = ax_2 + (1-a)(ax_1 + (1-a)y_0)$<br/>
-&emsp; $= ax_2 + a(1-a)x_1 + (1-a)^2y_0$ &emsp; $(4)
 
-Finally, we substitute $(1)$
+***Now let's simplify*** 
+
+$y_2 = ax_2 + a(1-a)x_1 + (1-a)^2y_0$ &emsp; $(4)$
+
+***We substitute*** $(1)$ ***for*** $(4)$
+
+$y_2 = ax_2 + a(1-a)x_1 + (1-a)^2(ax_0)$<br/>
+
+***Now for our final simplification*** 
+
+$y_2 = ax_2 + a(1-a)x_1 + a(1-a)^2x_0$<br/>
+
+I hope that by now you have a good understanding of how the exponential filter works. I know that the last section had a bit of math about exponential smoothing, but trust me, this will be useful for understanding 1€ Filter since it uses it, and we will see how.
