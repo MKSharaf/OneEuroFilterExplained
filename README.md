@@ -58,7 +58,7 @@ $y_t = ax_t + (1-a)y_{t-1}$ <br/>
 
 As we can see, $y_{t-1}$ holds the last smoothed observation and it eoncombeses all of the previous observations. This also shows how a past observation gets a smaller and smaller value as a result of the increasing power.
 
-One last thing to do now for us to understand exponential smoothing is to show how the filter works at the start
+One last thing to do now for us to make sure that we grasp how exponential smoothing is works as a function is to see it work from the start
 
 $y_0 = ax_0$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(1)$<br/>
 $y_1 = ax_1 + (1-a)y_0$ &emsp; $(2)$<br/>
@@ -67,4 +67,6 @@ $y_2 = ax_2 + (1-a)y_1$ &emsp; $(3)$<br/>
 Now when we substitute $(2)$ for $(3)$
 
 $y_2 = ax_2 + (1-a)(ax_1 + (1-a)y_0)$<br/>
-&emsp; $=
+&emsp; $= ax_2 + a(1-a)x_1 + (1-a)^2y_0$ &emsp; $(4)
+
+Finally, we substitute $(1)$
