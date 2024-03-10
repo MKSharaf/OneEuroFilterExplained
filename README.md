@@ -20,3 +20,30 @@ The black cursor is our true value, while the white dots represent our observati
 Now, we can explain the signals that we see on the right. The black signal is our cursor, and as long as it doesn't move, it's signal will continue being a flat, smooth one. That is because the value isn't seeing any change. However, the white signal sees a lot of movements, and now we should already know that is because of the noise being added to every observation. This is a clear demonstration of noise and it's affect on a value we are observing. This could be considered a small problem if we aren't looking at real-time data, because we can use very complex and computionally heavy algorithms to minimize the noise, but with real-time data we have to take lag into consideration thus making noise a major problem to any real-time data observations.
 
 Admittedly, this is a very small explanation to noise in general, but hopefully, this is all that we will need.
+
+## Low-Pass Filters
+
+Now that we understand noise and how it affects our observations, it is time for us to talk about how we can minimize this effect.
+
+1€ Filter is used for human motion, and since noise in these movements typically forms high frequencies in the signal while actual limb movements cause lower frequencies, it only logical for us to use a low-pass filter. But, what excatly a low-pass filter? 
+
+A simple explanation for low-pass filters is that they are filters which are used to only let signals with lower frequencies than a predetermined cut-off value pass, while attenuuating higher frequencies.
+
+![lowpassfilter-formula1](https://github.com/MKSharaf/OneEuroFilterExplained/assets/135005981/6193033f-f696-4a43-a8f1-a9164505aaa7)
+
+### Exponential Smoothing
+
+Exponential smoothing is a kind of a low-pass filter that assigns exponentially decreasing weights to past observations over time. As we discussed already, exponential smoothing is a low-pass filter which means that is used to remove high frequencies. 
+
+$y_t = ax_t + (1-a)y_{t-1}$
+
+This is the overall formula for exponential smoothing, and now let's explain each variable in the formula: -
+
+* $x_t$ is the input data, aka the observed data at time $t$
+* $a$ is a smoothing factor, where $0 < a < 1$
+* $y_{t-1}$ is the last smoothed observations that is the result of all the previous computations
+* $y_t$ is the result of the new smoothed observation 
+
+$a$ has no formal procedure to be chosen with. A large value for $a$ reduces the smoothing effect, while a small value increases it. This is because the closer $a$'s value gets to $1$, the less weight that will be given to the past obeservations to the point where if $a$ becomes $1$ the output will just be the current observation with no smoothing effect. The opposite is also true, the closer $a$'s value gets to $0$, the greater the smoothing effect will be, this also happens because lesser weight will be given to current observations which will make the smoothing effect less responsive to new observations.
+
+This is basically how it also works as a filter. The closer $a$ will be to $0$, the more jitter that would be reduced, but at the same it would result in more lag since the outputs won't respond as quickly to new observations. 
