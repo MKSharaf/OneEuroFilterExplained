@@ -5,7 +5,7 @@ Noisy real-time signals is a problem that plagues many systems. Noise causes a r
 
 ## The Jitter-Latency Tradeoff
 
-The jitter-latency (more commonly known as lag) tradeoff is a problem that happens when implementing filters. Any filter introduces lag to a certain extent, where the observations become delayed a bit from their real-time counterparts, but the result of that is more accuracy and perception. This introduces a dilemma, where more complex and computionally heavy filters could result in less jitter, but more lag. This means that we have to take both effects in consideration. To find a good filter it must be accurate, and, to an extent, computaionally simple at the same time. If we are talking numbers, then lag should be below 60 ms, and as we said, any filter introduces lag and considering 40:50 ms of inherent lag, we only have 10:20 ms for jitter.
+The jitter-latency (more commonly known as lag) tradeoff is a problem that happens when implementing filters. Any filter introduces lag to a certain extent, where the observations become delayed a bit from their real-time counterparts, but the result of that is more accuracy and precision. This introduces a dilemma, where more complex and computionally heavy filters could result in less jitter, but more lag. This means that we have to take both effects in consideration. To find a good filter it must be accurate, and, to an extent, computaionally simple at the same time. If we are talking numbers, then lag should be below 60 ms, and as we said, any filter introduces lag and considering 40:50 ms of inherent lag, we only have 10:20 ms for jitter.
 
 ## Noise Visualized
 
