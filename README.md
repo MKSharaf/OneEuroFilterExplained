@@ -35,7 +35,7 @@ A simple explanation for low-pass filters is that they are filters which are use
 
 Exponential smoothing is a kind of a low-pass filter that assigns exponentially decreasing weights to past observations over time. As we discussed already, exponential smoothing is a low-pass filter which means that is used to remove high frequencies. 
 
-$y_t = ax_t + (1-a)y_{t-1}$
+$y_t = ax_t + (1-a)y_{t-1} (1)$
 
 This is the overall formula for exponential smoothing, and now let's explain each variable in the formula: -
 
@@ -60,19 +60,19 @@ As we can see, $y_{t-1}$ holds the last smoothed observation and it eoncombeses 
 
 One last thing to do now for us to make sure that we grasp how exponential smoothing is works as a function is to see it work from the start
 
-$y_0 = ax_0$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(1)$<br/>
-$y_1 = ax_1 + (1-a)y_0$ &emsp; $(2)$<br/>
-$y_2 = ax_2 + (1-a)y_1$ &emsp; $(3)$<br/>
+$y_0 = ax_0$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(2)$<br/>
+$y_1 = ax_1 + (1-a)y_0$ &emsp; $(3)$<br/>
+$y_2 = ax_2 + (1-a)y_1$ &emsp; $(4)$<br/>
 
-***We substitute*** $(2)$ ***for*** $(3)$
+***We substitute*** $(3)$ ***for*** $(4)$
 
 $y_2 = ax_2 + (1-a)(ax_1 + (1-a)y_0)$<br/>
 
 ***Now let's simplify*** 
 
-$y_2 = ax_2 + a(1-a)x_1 + (1-a)^2y_0$ &emsp; $(4)$
+$y_2 = ax_2 + a(1-a)x_1 + (1-a)^2y_0$ &emsp; $(5)$
 
-***We substitute*** $(1)$ ***for*** $(4)$
+***We substitute*** $(2)$ ***for*** $(5)$
 
 $y_2 = ax_2 + a(1-a)x_1 + (1-a)^2(ax_0)$<br/>
 
@@ -81,3 +81,33 @@ $y_2 = ax_2 + a(1-a)x_1 + (1-a)^2(ax_0)$<br/>
 $y_2 = ax_2 + a(1-a)x_1 + a(1-a)^2x_0$<br/>
 
 I hope that by now you have a good understanding of how the exponential filter works. I know that the last section had a bit of math about exponential smoothing, but trust me, this will be useful for understanding 1€ Filter since it uses it, and we will see how.
+
+## 1€ Filter
+
+1€ Filter stands out because of its ability of adapting its cutoff frequency to an estimate of the signal's speed, aka derivative value, for each new sample. We will start with the algorithm's formulas, and then explain them afterwards.
+
+$a  = \Huge{1 \over {1 + {τ \over {T_e}}}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $(6)$<br/>
+$τ  = \Huge{1 \over {2πf_c}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(7)$ <br/> 
+$f_c = f_{c_{min}} + β|Y|$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $(8)$ <br/>  
+$y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over {T_e}}}}$  &emsp; $(9)$ <br/>
+
+### 1€ Filter is an Exponential Smoother
+
+I already mentioned that 1€ Filter is an exponential smoother, but how does the forumla correlate to that of the exponential smoother?
+
+We can derive the 1€ Filter formula by doing direct substitution on $(1)$. ***Let's start by substituting*** $(1)$ ***for*** $(6)$
+
+$y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + (1 \Huge - {1 \over {1 + {τ \over {T_e}}}}\normalsize )y_{t-1}$ <br/>
+&emsp; $= \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + (\Huge{{1 + {τ \over {T_e}}} \over {1 + {τ \over {T_e}}}} - {1 \over {1 + {τ \over {T_e}}}}\normalsize )y_{t-1}$
+
+***Now we simplifiy***
+
+$y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + \Huge{{{τ \over {T_e}}} \over {1 + {τ \over {T_e}}}}\normalsize y_{t-1}$
+
+***Finally, let's take*** (6) ***as a common factor***
+
+$y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over {T_e}}}}$
+
+We successfully managed to derive 1€ Filter from Exponential Smoother, now all we have to do is explain the variables and how they contribute to the algorithm.
+
+
