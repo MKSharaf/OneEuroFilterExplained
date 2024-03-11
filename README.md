@@ -130,7 +130,11 @@ Since all of that is out of the way, now we can understand $τ$. $τ$ is simply 
 
 $τ  = \Huge{1 \over {2πf_c}}$ <br/> 
 
-Finally, we can now see how the smoothing factor, $a$, changes. When $f_c$ changes, it directly causes change in $t$, and when that happens $a$ changes. This seems tiring to us, but it is a couple of simple computations that can be done rather quickly, this in fact, is one of the things that makes 1€ Filter unique.
+Finally, we can now see how the smoothing factor, $a$, changes. When $f_c$ changes, it directly causes change in $τ$, and when that happens $a$ changes. This seems tiring to us, but it is a couple of simple computations that can be done rather quickly, this in fact, is one of the things that makes 1€ Filter unique.
 
-### The thought behined it
+### The Thought Behined it
+
+It is best to describe this section with the example of the human body movements. The author acknowledges that finding a trade-off between jitter and lag is difficult when you have something that changes its speed regularly that is because the signal is more suspectable to noise at low speeds and not lag, and more sensitive to lag at high speeds and not noise. This means we have to care more about smoothing and not lag when the speed is slow, and we have to care more about the lag and not the noise when the speed is fast. You can try all of this yourself using the aforementioned [tool](https://gery.casiez.net/1euro/InteractiveDemo/) .
+
+This fact of being unable to find a good way to balance between the two when monitoring something this versatile is what caused the need for an adaptive cut-off frequency. $f_c$ has an direct relationship with the smoothing factor, $a$, this means when $f_c$'s value is small, the smoothing effect is increased. As we discussed earlier, $f_c$ decreases when the speed decreases, and when $f_c$'s value is large, the smoothing effect is decreased to decrease lag. See $(8)$ and its explaniation. 
 
