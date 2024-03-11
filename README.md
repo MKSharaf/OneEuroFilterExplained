@@ -104,7 +104,7 @@ $y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + (1 \Huge - {1 \ove
 
 $y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + \Huge{{{τ \over {T_e}}} \over {1 + {τ \over {T_e}}}}\normalsize y_{t-1}$
 
-***Finally, let's take*** (6) ***as a common factor***
+***Finally, let's take*** $(6)$ ***as a common factor***
 
 $y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over {T_e}}}}$
 
