@@ -48,7 +48,7 @@ $a$ has no formal procedure to be chosen with. A large value for $a$ reduces the
 
 This is basically how it also works as a filter. The closer $a$ will be to $0$, the more jitter that would be reduced, but at the same it would result in more lag since the outputs won't respond as quickly to new observations. 
 
-### How it works?
+### How does it work?
 
 So, how exactly does exponential smoothing gives exponentially decreasing weights to its past observations? We can see this effect by performing direct substitution to the original formula
 
@@ -110,4 +110,27 @@ $y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over
 
 We successfully managed to derive 1€ Filter from Exponential Smoother, now all we have to do is explain the variables and how they contribute to the algorithm.
 
+### Smoothing Factor
+
+The first thing 1€ Filter tries to address is the challenge of the changing pace at which events can occur with an event-driven system. This can cause problems when it comes to filtering because the filter's response may not be aligned with the occurrence of the events. This could make the filter uncapable to adapt to possible fluctuations. To help with that, 1€ Filter takes into consideration the actual time interval between samples in its smoothing factor, $T_e$.
+
+$T_e = T_t - T_{t-1}$
+
+Now to explain $τ$, we must explain $(8)$ first.
+
+$f_c = f_{c_{min}} + β|Y|$ 
+
+* $f_{c_{min}}$ is the minimum cutoff frequency that is chosen at the start, it is a constant that must be $> 0$.
+* $β$ is the speed coefficient that is also chosen at the start, it is responsible for controlling how much the signal's speed is going to effect the resulting $f_c$
+* $Y$ is the signal's speed, which can be computed with something simply by calculating the derivative of the signal
+
+$Y = \Huge{x_t - y_{t-1} \over {T_e}}$
+
+Since all of that is out of the way, now we can understand $τ$. $τ$ is simply a time constant that changes with the changing of $f_c$. If $f_c$ increases, $τ$ decreases, and if it decreases, $τ$ increases.
+
+$τ  = \Huge{1 \over {2πf_c}}$ <br/> 
+
+Finally, we can now see how the smoothing factor, $a$, changes. When $f_c$ changes, it directly causes change in $t$, and when that happens $a$ changes. This seems tiring to us, but it is a couple of simple computations that can be done rather quickly, this in fact, is one of the things that makes 1€ Filter unique.
+
+### The thought behined it
 
