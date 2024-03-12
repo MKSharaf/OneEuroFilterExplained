@@ -35,7 +35,7 @@ A simple explanation for low-pass filters is that they are filters which are use
 
 Exponential smoothing is a kind of a low-pass filter that assigns exponentially decreasing weights to past observations over time. As we discussed already, exponential smoothing is a low-pass filter which means that is used to remove high frequencies. 
 
-$y_t = ax_t + (1-a)y_{t-1}&emsp;(1)$
+$y_t = ax_t + (1-a)y_{t-1}&emsp;&emsp;(1)$
 
 This is the overall formula for exponential smoothing, and now let's explain each variable in the formula: -
 
