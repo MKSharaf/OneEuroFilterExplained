@@ -86,10 +86,10 @@ I hope that by now you have a good understanding of how the exponential filter w
 
 1€ Filter stands out because of its ability of adapting its cutoff frequency to an estimate of the signal's speed, aka derivative value, for each new sample. We will start with the algorithm's formulas, and then explain them afterwards.
 
-$a  = \Huge{1 \over {1 + {τ \over {T_e}}}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $(6)$<br/>
-$τ  = \Huge{1 \over {2πf_c}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(7)$ <br/> 
+$a  = {1 \over {1 + \huge{τ \over {T_e}}}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $(6)$<br/>
+$τ  = {1 \over {2πf_c}}$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp; $(7)$ <br/> 
 $f_c = f_{c_{min}} + β|Y|$ &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $(8)$ <br/>  
-$y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over {T_e}}}}$  &emsp; $(9)$ <br/>
+$y_t = (x_t + {τ \over T_e}\normalsize y_{t-1}){1 \over {1 + \huge{τ \over {T_e}}}}$  &emsp; $(9)$ <br/>
 
 ### 1€ Filter is an Exponential Smoother
 
@@ -97,16 +97,16 @@ I already mentioned that 1€ Filter is an exponential smoother, but how does th
 
 We can derive the 1€ Filter formula by doing direct substitution on $(1)$. ***Let's start by substituting*** $(1)$ ***for*** $(6)$
 
-$y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + (1 \Huge - {1 \over {1 + {τ \over {T_e}}}}\normalsize )y_{t-1}$ <br/>
-&emsp; $= \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + (\Huge{{1 + {τ \over {T_e}}} \over {1 + {τ \over {T_e}}}} - {1 \over {1 + {τ \over {T_e}}}}\normalsize )y_{t-1}$
+$y_t = {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + (1 - {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize )y_{t-1}$ <br/>
+&emsp; $= {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + ({{1 + \huge{τ \over {T_e}}} \over {1 + \huge{τ \over {T_e}}}} - {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize )y_{t-1}$
 
 ***Now we simplifiy***
 
-$y_t = \Huge{1 \over {1 + {τ \over {T_e}}}}\normalsize x_t + \Huge{{{τ \over {T_e}}} \over {1 + {τ \over {T_e}}}}\normalsize y_{t-1}$
+$y_t = {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + {{\huge{τ \over {T_e}}} \over {1 + \huge{τ \over {T_e}}}}\normalsize y_{t-1}$
 
 ***Finally, let's take*** $(6)$ ***as a common factor***
 
-$y_t = (x_t +\Huge{τ \over T_e}\normalsize y_{t-1})\Huge{1 \over {1 + {τ \over {T_e}}}}$
+$y_t = (x_t + {τ \over T_e}\normalsize y_{t-1}){1 \over {1 + \huge{τ \over {T_e}}}}$
 
 We successfully managed to derive 1€ Filter from Exponential Smoother, now all we have to do is explain the variables and how they contribute to the algorithm.
 
