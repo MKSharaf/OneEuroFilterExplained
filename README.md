@@ -93,14 +93,14 @@ $y_t = (x_t + {τ \over T_e}\normalsize y_{t-1}){1 \over {1 + \huge{τ \over {T_
 
 ### 1€ Filter is an Exponential Smoother
 
-I already mentioned that 1€ Filter is an exponential smoother, but how does the forumla correlate to that of the exponential smoother?
+I already mentioned that 1€ Filter is an exponential smoother, but how does the formula correlate to that of the exponential smoother?
 
 We can derive the 1€ Filter formula by doing direct substitution on $(1)$. ***Let's start by substituting*** $(1)$ ***for*** $(6)$
 
 $y_t = {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + (1 - {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize )y_{t-1}$ <br/>
 &emsp; $= {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + ({{1 + \huge{τ \over {T_e}}} \over {1 + \huge{τ \over {T_e}}}} - {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize )y_{t-1}$
 
-***Now we simplifiy***
+***Now we simplify***
 
 $y_t = {1 \over {1 + \huge{τ \over {T_e}}}}\normalsize x_t + {{\huge{τ \over {T_e}}} \over {1 + \huge{τ \over {T_e}}}}\normalsize y_{t-1}$
 
@@ -121,7 +121,7 @@ Now to explain $τ$, we must explain $(8)$ first.
 $f_c = f_{c_{min}} + β|Y|$ 
 
 * $f_{c_{min}}$ is the minimum cutoff frequency that is chosen at the start, it is a constant that must be $> 0$.
-* $β$ is the speed coefficient that is also chosen at the start, it is responsible for controlling how much the signal's speed is going to effect the resulting $f_c$
+* $β$ is the speed coefficient that is also chosen at the start, it is responsible for controlling how much the signal's speed is going to affect the resulting $f_c$
 * $Y$ is the signal's speed, which can be computed with something simply by calculating the derivative of the signal
 
 $Y = \Huge{x_t - y_{t-1} \over {T_e}}$
@@ -136,5 +136,5 @@ Finally, we can now see how the smoothing factor, $a$, changes. When $f_c$ chang
 
 It is best to describe this section with the example of the human body movements. The author acknowledges that finding a trade-off between jitter and lag is difficult when you have something that changes its speed regularly that is because the signal is more suspectable to noise at low speeds and not lag, and more sensitive to lag at high speeds and not noise. This means we have to care more about smoothing and not lag when the speed is slow, and we have to care more about the lag and not the noise when the speed is fast. You can try all of this yourself using the aforementioned [tool](https://gery.casiez.net/1euro/InteractiveDemo/) .
 
-This fact of being unable to find a good way to balance between the two when monitoring something this versatile is what caused the need for an adaptive cut-off frequency. $f_c$ has an direct relationship with the smoothing factor, $a$, this means when $f_c$'s value is small, the smoothing effect is increased. As we discussed earlier, $f_c$ decreases when the speed decreases, and when $f_c$'s value is large, the smoothing effect is decreased to decrease lag. See $(8)$ and its explanation. 
+This fact of being unable to find a good way to balance between the two when monitoring something this versatile is what caused the need for an adaptive cut-off frequency. $f_c$ has a direct relationship with the smoothing factor, $a$, this means when $f_c$'s value is small, the smoothing effect is increased. As we discussed earlier, $f_c$ decreases when the speed decreases, and when $f_c$'s value is large, the smoothing effect is decreased to decrease lag. See $(8)$ and its explanation. 
 
